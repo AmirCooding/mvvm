@@ -7,11 +7,11 @@ import java.text.DateFormat
 @Entity(tableName = "note_table")
 data class Note(
     @PrimaryKey(autoGenerate = true)
-    private val id: Int = 0,
-    private val title: String,
-    private val description: String,
-    private val isFavorite: Boolean,
-    private val date: Long = System.currentTimeMillis()
+    val id: Int = 0,
+    val title: String,
+    val description: String,
+    val isFavorite: Boolean,
+    val date: Long = System.currentTimeMillis()
 ) {
     val createDate: String get() = DateFormat.getDateInstance().format(date)
 }
