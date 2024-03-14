@@ -1,4 +1,4 @@
-package com.amircodeing.mvvm.presentation
+package com.amircodeing.mvvm.presentation.note
 
 import androidx.lifecycle.ViewModel
 
