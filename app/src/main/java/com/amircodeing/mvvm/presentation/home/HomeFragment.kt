@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.amircodeing.mvvm.R
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
 
