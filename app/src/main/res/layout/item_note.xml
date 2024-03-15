@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        app:cardCornerRadius="10dp"
+        app:contentPadding="10dp"
+        android:layout_margin="5dp"
+        app:strokeWidth="1dp"
+        app:cardBackgroundColor="@color/pink"
+        app:cardUseCompatPadding="true"
+        app:elevation="10dp"
+        app:strokeColor="@color/grey"
+        android:layout_height="200dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:id="@+id/titleTV"
+                android:maxLines="1"
+                tools:text="Title: "
+                android:textSize="22sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:id="@+id/descriptionTV"
+                android:maxLines="3"
+                tools:text="Description : "
+                android:textSize="22sp"
+                app:layout_constraintTop_toBottomOf="@+id/titleTV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints"
+                android:id="@+id/imgFavorite"
+                android:padding="6dp"
+                android:src="@drawable/ic_favorite_empty"
+                tools:layout_editor_absoluteX="322dp"
+                tools:layout_editor_absoluteY="120dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dateTV"
+                android:maxLines="1"
+                tools:text="Create in : "
+                android:textSize="12sp"
+
+                app:layout_constraintBottom_toBottomOf="@+id/imgFavorite"
+                app:layout_constraintVertical_bias="0.571"
+                app:layout_constraintTop_toTopOf="@+id/imgFavorite"
+                app:layout_constraintEnd_toStartOf="@+id/imgFavorite"
+                android:layout_marginEnd="4dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

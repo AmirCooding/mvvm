@@ -10,11 +10,15 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-// i need just one Instance from this one,that#s way i use SingletonComponent::class in @InstallIn annotation
+// i need just one Instance from this one,that's way i use SingletonComponent::class in @InstallIn annotation
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
     @Provides
+    // Singleton
     @Singleton
-    fun provideDatabase(application: Application): NoteDatabase =
-      Room.databaseBuilder(application,NoteDatabase::class.java, "mvvm_database").build()
+    // The application provides Context for Room to create the database
+    fun provideDatabase(application: Application , callBack : NoteDatabase.CallBack): NoteDatabase =
+      Room.databaseBuilder(application,NoteDatabase::class.java, "mvvm_database")
+          .addCallback(callBack)
+          .build()
 }
