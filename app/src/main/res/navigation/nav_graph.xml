@@ -9,7 +9,11 @@
             android:id="@+id/homeFragment"
             android:name="com.amircodeing.mvvm.presentation.home.HomeFragment"
             android:label="fragment_home"
-            tools:layout="@layout/fragment_home" />
+            tools:layout="@layout/fragment_home" >
+        <action
+                android:id="@+id/action_homeFragment_to_noteFragment"
+                app:destination="@id/noteFragment" />
+    </fragment>
     <fragment
             android:id="@+id/noteFragment"
             android:name="com.amircodeing.mvvm.presentation.note.NoteFragment"

@@ -6,11 +6,11 @@
         app:cardCornerRadius="10dp"
         app:contentPadding="10dp"
         android:layout_margin="5dp"
-        app:strokeWidth="1dp"
+        app:strokeWidth="3dp"
         app:cardBackgroundColor="@color/pink"
         app:cardUseCompatPadding="true"
         app:elevation="10dp"
-        app:strokeColor="@color/grey"
+        app:strokeColor="@color/pink"
         android:layout_height="200dp">
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                 android:id="@+id/descriptionTV"
                 android:maxLines="3"
                 tools:text="Description : "
-                android:textSize="22sp"
+                android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@+id/titleTV"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,14 +42,16 @@
                 app:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 tools:ignore="MissingConstraints"
                 android:id="@+id/imgFavorite"
                 android:padding="6dp"
+
                 android:src="@drawable/ic_favorite_empty"
-                tools:layout_editor_absoluteX="322dp"
-                tools:layout_editor_absoluteY="120dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionTV"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
@@ -60,10 +62,8 @@
                 android:textSize="12sp"
 
                 app:layout_constraintBottom_toBottomOf="@+id/imgFavorite"
-                app:layout_constraintVertical_bias="0.571"
                 app:layout_constraintTop_toTopOf="@+id/imgFavorite"
-                app:layout_constraintEnd_toStartOf="@+id/imgFavorite"
-                android:layout_marginEnd="4dp" />
+                app:layout_constraintEnd_toStartOf="@+id/imgFavorite" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

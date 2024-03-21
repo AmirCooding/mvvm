@@ -6,4 +6,7 @@
     <string name="sort_bydate">sort bydate</string>
     <string name="sort_by_date">sort by date</string>
     <string name="show_favorite">show favorite</string>
+    <string name="save">save</string>
+    <string name="title">Title...</string>
+    <string name="description">Description...</string>
 </resources>

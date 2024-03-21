@@ -5,6 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.amircodeing.mvvm.data.local.dao.NoteDao
 import com.amircodeing.mvvm.data.local.model.Note
+import com.amircodeing.mvvm.di.scops.ApplicationScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,7 +21,7 @@ abstract class NoteDatabase : RoomDatabase() {
 
     class CallBack @Inject constructor(
         private val database: Provider<NoteDatabase>,
-        private val applicationScope: CoroutineScope
+    @ApplicationScope  private val applicationScope: CoroutineScope
     ) : RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
