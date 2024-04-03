@@ -11,7 +11,7 @@ import javax.inject.Inject
  *
  */
 class NoteRepository @Inject constructor(
-    // localDataSource: An instance of LocalDataSource to fetch notes from the local database.
+    // localDataSource: An instance of LocalDataSource to fetch notes from the  database.
     private val localDataSource: LocalDataSource
 ) {
     // Function to retrieve notes from the data source.

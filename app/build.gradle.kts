@@ -52,7 +52,8 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-    // implementation("com.android.data-binding:view binding:8.3.0")
+    implementation("androidx.datastore:datastore-core:1.0.0")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -63,9 +64,11 @@ dependencies {
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
+
 // hilt
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-android-compiler:2.48")
 // datastore
-    androidTestImplementation("androidx.datastore:datastore-preferences-android:1.1.0-beta01")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    androidTestImplementation("androidx.datastore:datastore-preferences-android:1.1.0-beta01@aar")
 }
