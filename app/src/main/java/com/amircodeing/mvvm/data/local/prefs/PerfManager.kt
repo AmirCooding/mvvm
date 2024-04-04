@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Inject
 
-enum class SortBy{
+enum class SortBy {
     DATE, NAME
 }
 
@@ -43,20 +43,36 @@ class PerfManager @Inject constructor(private val appDataStore: DataStore<Prefer
     suspend fun saveSortOrder(sortBy: SortBy) = appDataStore.edit { preferences ->
         preferences[sort] = sortBy.name
     }
-// read data
+
+    suspend fun saveFavorite(favoriteState: Boolean) =
+        appDataStore.edit { preferences -> preferences[favorite] = favoriteState }
+
+
+    // read sort
     val readSortOrder = appDataStore.data.catch { exception ->
         if (exception is IOException) emit(
             emptyPreferences()
         ) else throw exception
     }.map { prferences -> prferences[sort] ?: SortBy.DATE.name }
-
-    suspend fun saveFavorite(favoriteState: Boolean) =
-        appDataStore.edit { preferences -> preferences[favorite] = favoriteState }
-
+    // read sort read isFavorite
     val readFavorite = appDataStore.data.catch { exception ->
         if (exception is IOException) emit(
             emptyPreferences()
         ) else throw exception
     }.map { preferences -> preferences[favorite] ?: FAVORITE }
+
+
+
+// Here I took both together ( SortBy , iSFavorite ) and put them in one data class
+    val readSearchNote = appDataStore.data.catch { exception ->
+        if (exception is IOException) emit(
+            emptyPreferences()
+        ) else throw exception
+    }.map { preferences ->
+        FilterPrefs(
+            SortBy.valueOf(preferences[sort] ?: SortBy.NAME.name), preferences[favorite] ?: FAVORITE
+        )
+    }
 }
 
+data class FilterPrefs(val sortBy: SortBy, val isFavorite: Boolean)
