@@ -17,15 +17,17 @@ import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Inject
 
+enum class SortBy{
+    DATE, NAME
+}
 
 /**
  * @DataStore provides a safe and durable way to store small amounts of data, such as preferences and application state.
  * DataStore bietet eine sichere und dauerhafte Möglichkeit, kleine Datenmengen wie Einstellungen und Anwendungsstatus zu speichern.
- *
+ * i do to combine die
  */
 class PerfManager @Inject constructor(private val appDataStore: DataStore<Preferences>) {
 
-// Assume appDataStore is your DataStore<Preferences> instance
 
     // Define a key for your preference
     private object PreferencesKey {
@@ -33,11 +35,15 @@ class PerfManager @Inject constructor(private val appDataStore: DataStore<Prefer
         val favorite = booleanPreferencesKey(PREFERENCES_FAVORITE_KEY)
     }
 
+    /**
+     * @Suspend Function  : Eine Funktion, die sich selbst anhält und zu gegebener Zeit zum Hauptstream zurückkehrt
+     */
+
     // Suspend function to update the sort order in DataStore
     suspend fun saveSortOrder(sortBy: SortBy) = appDataStore.edit { preferences ->
         preferences[sort] = sortBy.name
     }
-
+// read data
     val readSortOrder = appDataStore.data.catch { exception ->
         if (exception is IOException) emit(
             emptyPreferences()
@@ -54,6 +60,3 @@ class PerfManager @Inject constructor(private val appDataStore: DataStore<Prefer
     }.map { preferences -> preferences[favorite] ?: FAVORITE }
 }
 
-enum class SortBy {
-    NAME, DATE,
-}

@@ -1,8 +1,8 @@
 package com.amircodeing.mvvm.data.local.dataSource
 
 import com.amircodeing.mvvm.data.local.dao.NoteDao
-import com.amircodeing.mvvm.data.local.dataSource.LocalDataSource
 import com.amircodeing.mvvm.data.local.model.Note
+import com.amircodeing.mvvm.data.local.prefs.SortBy
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -15,9 +15,9 @@ class LocalDataSourceImpl @Inject constructor(
 
     // Overrides the getNotes function from the LocalDataSource interface.
     // Uses the noteDao to retrieve a list of Note objects from the local database.
-    override fun getNotes(): Flow<List<Note>> {
+    override fun getNotes(search: String, isFavorite: Boolean, sortBy: SortBy): Flow<List<Note>> {
         // Call the getNotes() method on noteDao to fetch notes from the database.
-        return noteDao.getNotes()
+        return noteDao.getNotes(search, isFavorite, sortBy)
     }
 
 }
