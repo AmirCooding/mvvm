@@ -35,7 +35,7 @@ interface NoteDao {
      */
     @Query(
         "SELECT * FROM note_table WHERE isFavorite = CASE WHEN :favorite = 1 THEN 1 ELSE isFavorite END " +
-                "AND (title LIKE '%' || :search || '%' OR description LIKE '%' || :search || '%' ) order by date asc"
+                "AND (title LIKE '%' || :search || '%' OR description LIKE '%' || :search || '%' ) order by date desc"
     )
     fun getNotesByDate(favorite: Boolean, search: String): Flow<List<Note>>
 

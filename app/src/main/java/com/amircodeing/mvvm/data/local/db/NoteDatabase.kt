@@ -29,10 +29,19 @@ abstract class NoteDatabase : RoomDatabase() {
             // show prototype to users
             applicationScope.launch {
                 noteDao.insertNote(
+
                     Note(
                         title = "test1",
                         description = "This is the test1 description",
                         isFavorite = true
+                    )
+                )
+                noteDao.insertNote(
+
+                    Note(
+                        title = "test4",
+                        description = "This is the test4 description",
+                        isFavorite = false
                     )
                 )
                 noteDao.insertNote(

@@ -11,6 +11,7 @@ import com.amircodeing.mvvm.data.repository.NoteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import androidx.lifecycle.viewModelScope
+import com.amircodeing.mvvm.data.local.model.helper.SortBy
 import com.amircodeing.mvvm.data.local.prefs.PerfManager
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
@@ -62,6 +63,16 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
+
+    fun onFavoriteIsSelected(checked: Boolean) {
+        viewModelScope.launch { prefsManager.saveFavorite(checked) }
+
+    }
+
+    fun onSortedIsSelected(sort: SortBy) {
+  viewModelScope.launch { prefsManager.saveSortOrder(sort) }
+    }
+
 
     sealed class HomeEvents() {
         data object NavigateToNoteFragment : HomeEvents()
