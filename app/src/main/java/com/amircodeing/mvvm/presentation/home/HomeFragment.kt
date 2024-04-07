@@ -109,6 +109,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }
         }
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        searchView.setOnQueryTextListener(null)
     }
 
     private fun implementSearchView(menu: Menu) {
