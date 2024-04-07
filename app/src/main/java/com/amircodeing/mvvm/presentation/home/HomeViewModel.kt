@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import androidx.lifecycle.viewModelScope
 import com.amircodeing.mvvm.data.local.prefs.PerfManager
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -33,27 +34,9 @@ class HomeViewModel @Inject constructor(
     private val prefsManager: PerfManager
 ) : ViewModel() {
 
-
-    /*     val _notes = MutableStateFlow<List<Note>>(emptyList())
-        val note = _notes.asStateFlow() */
-
     private val _homeEventsChannel = Channel<HomeEvents>()
     val homeViewChannel = _homeEventsChannel.receiveAsFlow()
 
-    /*     init {
-            getNotes()
-        }
-
-        private fun getNotes() {
-            viewModelScope.launch {
-                repository.getNotes().collectLatest {
-                    _notes.emit(it)
-                }
-            }
-        } */
-
-    // change after Dynamic Query for Search and Favorite and Sort
-    // send empty request to database and get a list of all data as response
     val searchQuery = state.getLiveData("search", "")
 
     private val notes =
@@ -72,10 +55,19 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    sealed class HomeEvents() {
-        data object NavigateToNoteFragment : HomeEvents() {
-
+    fun getNotes() {
+        viewModelScope.launch {
+            notes.collectLatest {
+                _homeEventsChannel.send(HomeEvents.SendNotes(it))
+            }
         }
     }
+
+    sealed class HomeEvents() {
+        data object NavigateToNoteFragment : HomeEvents()
+        data class SendNotes(val notes: List<Note>) : HomeEvents()
+
+    }
 }
+
 

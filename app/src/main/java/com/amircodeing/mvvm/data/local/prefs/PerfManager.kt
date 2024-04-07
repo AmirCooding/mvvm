@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.preferencesOf
 import androidx.datastore.preferences.core.stringPreferencesKey
+import com.amircodeing.mvvm.data.local.model.helper.SortBy
 import com.amircodeing.mvvm.data.local.prefs.PerfManager.PreferencesKey.favorite
 import com.amircodeing.mvvm.data.local.prefs.PerfManager.PreferencesKey.sort
 import com.amircodeing.mvvm.utils.Constants.FAVORITE
@@ -17,9 +18,7 @@ import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Inject
 
-enum class SortBy {
-    DATE, NAME
-}
+
 
 /**
  * @DataStore provides a safe and durable way to store small amounts of data, such as preferences and application state.

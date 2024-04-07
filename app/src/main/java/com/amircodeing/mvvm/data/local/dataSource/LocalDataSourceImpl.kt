@@ -2,7 +2,7 @@ package com.amircodeing.mvvm.data.local.dataSource
 
 import com.amircodeing.mvvm.data.local.dao.NoteDao
 import com.amircodeing.mvvm.data.local.model.Note
-import com.amircodeing.mvvm.data.local.prefs.SortBy
+import com.amircodeing.mvvm.data.local.model.helper.SortBy
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

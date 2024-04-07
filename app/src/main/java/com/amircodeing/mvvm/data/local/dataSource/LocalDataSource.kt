@@ -1,6 +1,6 @@
 package com.amircodeing.mvvm.data.local.dataSource
 import com.amircodeing.mvvm.data.local.model.Note
-import com.amircodeing.mvvm.data.local.prefs.SortBy
+import com.amircodeing.mvvm.data.local.model.helper.SortBy
 import kotlinx.coroutines.flow.Flow
 
 // Interface representing a local data source for retrieving notes

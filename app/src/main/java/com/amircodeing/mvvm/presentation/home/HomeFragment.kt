@@ -27,12 +27,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
+        viewModel.getNotes()
         homeAdapter = HomeAdaptor()
         binding.rvHome.apply {
             adapter = homeAdapter
             layoutManager = LinearLayoutManager(binding.root.context)
         }
-        observers()
+        //observers()
         observedEvent()
         binding.fabAddNote.setOnClickListener {
             viewModel.fabClicked()
@@ -42,11 +43,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun observedEvent() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.homeViewChannel.collect {
-                    when (it) {
+                viewModel.homeViewChannel.collect {event ->
+                    when (event) {
                         is HomeViewModel.HomeEvents.NavigateToNoteFragment -> {
                             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNoteFragment())
                         }
+                        is HomeViewModel.HomeEvents.SendNotes -> homeAdapter.submitList(event.notes)
 
                     }
                 }
@@ -54,13 +56,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    private fun observers() {
+/*     private fun observers() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.note.collectLatest {
+                viewModel.notes.collectLatest {
                     homeAdapter.submitList(it)
                 }
             }
         }
-    }
+    } */
 }
