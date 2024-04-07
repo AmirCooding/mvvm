@@ -1,8 +1,6 @@
 package com.amircodeing.mvvm.presentation.home
 
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
@@ -13,13 +11,11 @@ import javax.inject.Inject
 import androidx.lifecycle.viewModelScope
 import com.amircodeing.mvvm.data.local.model.helper.SortBy
 import com.amircodeing.mvvm.data.local.prefs.PerfManager
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -37,6 +33,8 @@ class HomeViewModel @Inject constructor(
 
     private val _homeEventsChannel = Channel<HomeEvents>()
     val homeViewChannel = _homeEventsChannel.receiveAsFlow()
+    private val _showFavorite = MutableStateFlow(false)
+    val showFavorite : StateFlow<Boolean> = _showFavorite
 
     val searchQuery = state.getLiveData("search", "")
 
@@ -54,6 +52,19 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             _homeEventsChannel.send(HomeEvents.NavigateToNoteFragment)
         }
+    }
+
+
+     init {
+         giveMeFavoriteAction()
+
+
+     }
+
+    private fun giveMeFavoriteAction() {
+      viewModelScope.launch { prefsManager.readFavorite.collectLatest {
+          _showFavorite.emit(it)
+      } }
     }
 
     fun getNotes() {
